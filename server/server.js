@@ -4,6 +4,9 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+// Add line to be able to use JSON
+app.use(express.json());
+
 const MongoClient = require('mongodb').MongoClient;
 const createRouter = require('./helpers/create_router.js');
 
@@ -13,6 +16,7 @@ MongoClient.connect('mongodb://localhost:27017')
     const sightingsCollection = db.collection('sightings');
     const sightingsRouter = createRouter(sightingsCollection);
     app.use('/api/sightings', sightingsRouter);
+
   })
   .catch(console.err);
 
